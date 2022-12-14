@@ -1,0 +1,16 @@
+{
+    "NIRLAUNCHER_UPDATE": {
+        "UPDATE_NIRLAUNCHER": true
+    },
+    "NIRLAUNCHER_INFO": {
+        "VERSION": "1.1.1",
+        "NIRLAUNCHER_FOLDER": "C://"
+    },
+    "NIRLAUNCHER_UPDATER_UPDATE": {
+        "UPDATE_NIRLAUNCHER_UPDATER": true
+    },
+    "NIRLAUNCHER_UPDATER_INFO":{
+        "VERSION": "1.0",
+        "LOCATION": "C://"
+    }
+}
