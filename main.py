@@ -25,10 +25,38 @@ class update_launcher():
     def get_nirlauncher_downlad_zip(download_link):
         pass
 
-class get_config():
+class config():
+    def get_current_installed_version():
+        old_versions = []
+        with open("saves/version.txt") as file:
+            for line in file:
+                line = line.rstrip("\n")
+                old_versions.append(line)
+        return old_versions[0]
+
+    def write_current_installed_version(version):
+        myfile = open("saves/version.txt", "w+")
+        myfile.write(new_version)
+        myfile.close()
+
+    def write_to_all_version(version):
+        myfile = open("saves/versions.txt", "a")
+        myfile.write("\n" + new_version)
+        myfile.close()
+
     def config(file_path):
         with open(file_path, "r") as f:
             return json.load(f)
 
-print(update_launcher.get_nirlauncher_version())
-print(update_launcher.get_nirlauncher_link_downlad())
+new_version = update_launcher.get_nirlauncher_version()
+
+
+old_version = config.get_current_installed_version()
+if not (old_version == new_version):
+    print("new version online")
+    print(new_version)
+    config.write_current_installed_version(new_version)
+    config.write_to_all_version(new_version)
+
+
+#print(update_launcher.get_nirlauncher_link_downlad())
