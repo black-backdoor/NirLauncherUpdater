@@ -1,11 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-
+from zipfile import ZipFile
 
 url = "https://launcher.nirsoft.net/downloads/index.html"
 class update_launcher():
-    def get_nirlauncher_version():
+    def get_online_nirlauncher_version():
         reqs = requests.get(url)
         soup = BeautifulSoup(reqs.text, 'html.parser')
         version = str(soup)
@@ -14,7 +14,7 @@ class update_launcher():
         version = version.replace("\n", "")
         return version
 
-    def get_nirlauncher_link_downlad():
+    def get_online_nirlauncher_link_downlad():
         reqs = requests.get(url)
         download_link = str(reqs.text)
         old, download_link = download_link.split('<p>\n<a href="', 1)
@@ -22,11 +22,32 @@ class update_launcher():
         download_link = "https:" + download_link
         return download_link
 
-    def get_nirlauncher_downlad_zip(download_link):
+    def get_current_installed_nirlauncher_version():
+        old_versions = []
+        with open("saves/version.txt") as file:
+            for line in file:
+                line = line.rstrip("\n")
+                old_versions.append(line)
+        return old_versions[0]
+
+    def download_newest_nirlauncher_zip():
         pass
 
+    def unzip_download(location, password):
+        with ZipFile(location) as zf:
+            zf.extractall(pwd=password)
+
+    def install_download(location):
+        pass
+
+    def override_installation_folder(location):
+        pass
+    
+    
+    
+
 class config():
-    def get_current_installed_version():
+    def get_current_installed_nirlauncher_version():
         old_versions = []
         with open("saves/version.txt") as file:
             for line in file:
@@ -48,15 +69,14 @@ class config():
         with open(file_path, "r") as f:
             return json.load(f)
 
-new_version = update_launcher.get_nirlauncher_version()
+new_version = update_launcher.get_online_nirlauncher_version()
+old_version = update_launcher.get_current_installed_nirlauncher_version()
 
-
-old_version = config.get_current_installed_version()
 if not (old_version == new_version):
     print("new version online")
     print(new_version)
     config.write_current_installed_version(new_version)
     config.write_to_all_version(new_version)
+    print(update_launcher.get_nirlauncher_link_downlad())
 
-
-#print(update_launcher.get_nirlauncher_link_downlad())
+print("finish")
