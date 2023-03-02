@@ -71,7 +71,7 @@ class config():
 
 new_version = update_launcher.get_online_nirlauncher_version()
 old_version = update_launcher.get_current_installed_nirlauncher_version()
-
+print(new_version)
 if not (old_version == new_version):
     print("new version online")
     print(new_version)
